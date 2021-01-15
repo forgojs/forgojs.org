@@ -15,7 +15,7 @@ module.exports = {
       title: "ForgoJS",
       logo: {
         alt: "ForgoJS",
-        src: "img/forgo.svg",
+        src: "img/forgo.png",
       },
       items: [
         {
