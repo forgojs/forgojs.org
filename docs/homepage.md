@@ -264,3 +264,8 @@ If you're using TypeScript, add the following lines to your tsconfig.json file.
   }
 }
 ```
+
+## Getting Help
+
+You can reach out to me via twitter or email. If you find issues, please file a bug on [Github](https://github.com/forgojs/forgo/issues).
+
