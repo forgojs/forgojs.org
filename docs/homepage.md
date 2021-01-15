@@ -21,18 +21,6 @@ custom_edit_url: null
   </div>  
 </div>
 
-# forgo
-
-- Use HTML DOM APIs for accessing elements
-- There are no synthetic events
-- Use closures for maintaining component state
-- There's no vDOM or DOM diffing
-- Renders are manually triggered
-
-## We'll be tiny. Always.
-
-All of Forgo is in one small JS file (actually it's TypeScript). It is a goal of the project is to remain within that single file.
-
 ## Installation
 
 ```
@@ -105,7 +93,7 @@ function Greeter(props) {
 
 You can read form input control values with regular DOM APIs.
 
-There's a small hurdle though - how do you we get a reference to the actual DOM elements? Well, that's where the ref attribute comes in. An object referenced by the ref attribute in an element's markup will have its value property set to the actual DOM element.
+There's a small hurdle though - how do we get a reference to the actual DOM element? That's where the ref attribute comes in. An object referenced by the ref attribute in an element's markup will have its value property set to the actual DOM element.
 
 Better explained with an example:
 
