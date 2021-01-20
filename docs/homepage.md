@@ -21,6 +21,7 @@ custom_edit_url: null
   </div>  
 </div>
 
+
 ## Installation
 
 ```
@@ -96,11 +97,35 @@ function Greeter(props) {
 
 ## Reading Form Input Elements
 
-You can read form input element values with regular DOM APIs.
+You can access and read form input elements using regular DOM APIs.
 
-There's a small hurdle though - how do we get a reference to the actual DOM element? That's where the ref attribute comes in. An object referenced by the ref attribute in an element's markup will have its value property set to the actual DOM element.
+Like this:
 
-Better explained with an example:
+```jsx
+function Component(props) {
+  const myInputRef = {};
+
+  return {
+    render(props, args) {
+      function onClick() {
+        const inputElement = document.getElementById("myinput");
+        alert(inputElement.value); // Read the text input!
+      }
+
+      return (
+        <div>
+          <input type="text" id="myinput" />
+          <button onclick={onClick}>Click me!</button>
+        </div>
+      );
+    },
+  };
+}
+```
+
+But there's also another way to do this, without requiring you to assign an id. An object referenced by the ref attribute in an element's markup will have its value property set to the actual DOM element.
+
+So you could do this as well:
 
 ```jsx
 function Component(props) {
@@ -257,8 +282,11 @@ window.addEventListener("load", () => {
 
 ## Routing
 
-Forgo Router is a tiny router for Forgo, and is just around 1KB gzipped.
-https://github.com/forgojs/forgo-router
+Forgo Router (forgo-router) is a tiny router for Forgo, and is just around 1KB gzipped. https://github.com/forgojs/forgo-router
+
+## Application State Management
+
+Forgo State (forgo-state) is an easy-to-use application state management solution for Forgo (like Redux or MobX), and is less than 1KB gzipped. https://github.com/forgojs/forgo-state
 
 ## Try it out on CodeSandbox
 
@@ -267,110 +295,6 @@ You can try the [Todo List app with Forgo](https://codesandbox.io/s/forgo-todos-
 Or if you prefer Typescript, try [Forgo TodoList in TypeScript](https://codesandbox.io/s/forgo-todos-typescript-9v0iy).
 
 There is also an example for using [Forgo with forgo-router](https://codesandbox.io/s/forgo-router-typescript-px4sg).
-
-## Recap with a complete example
-
-Finally, let's do a recap with a more complete example. Let's make a Todo List app in TypeScript.
-
-There will be three components:
-
-1. TodoList (the main component)
-2. TodoListItem
-3. AddTodo
-
-Here's the TodoList, which hosts the other two components.
-
-```tsx
-type TodoListProps = {};
-
-function TodoList(props: TodoListProps) {
-  let todos: string[] = [];
-
-  return {
-    render(props: TodoListProps, args: ForgoRenderArgs) {
-      function addTodos(text: string) {
-        todos.push(text);
-        rerender(args.element);
-      }
-
-      return (
-        <div>
-          <h1>Forgo Todos</h1>
-          <ul>
-            {todos.map((t) => (
-              <TodoListItem text={t} />
-            ))}
-          </ul>
-          <AddTodo onAdd={addTodos} />
-        </div>
-      );
-    },
-  };
-}
-```
-
-Here's the TodoListItem component, which simply displays a Todo.
-
-```tsx
-type TodoListItemProps = {
-  text: string;
-};
-
-function TodoListItem(props: TodoListItemProps) {
-  return {
-    render() {
-      return <li>{props.text}</li>;
-    },
-  };
-}
-```
-
-And here's the AddTodo component. It takes an onAdd function from the parent, which gets called whenever a new todo is added.
-
-```tsx
-type AddTodoProps = {
-  onAdd: (text: string) => void;
-};
-
-function AddTodo(props: AddTodoProps) {
-  const input: { value?: HTMLInputElement } = {};
-
-  function saveTodo() {
-    const inputEl = input.value;
-    if (inputEl) {
-      props.onAdd(inputEl.value);
-      inputEl.value = "";
-      inputEl.focus();
-    }
-  }
-
-  // Add the todo when Enter is pressed
-  function onKeyPress(e: KeyboardEvent) {
-    if (e.key === "Enter") {
-      saveTodo();
-    }
-  }
-
-  return {
-    render() {
-      return (
-        <div>
-          <input onkeypress={onKeyPress} type="text" ref={input} />
-          <button onclick={saveTodo}>Add me!</button>
-        </div>
-      );
-    },
-  };
-}
-```
-
-That's all. Mount it, and we're ready to go.
-
-```ts
-window.addEventListener("load", () => {
-  mount(<TodoList />, document.getElementById("root"));
-});
-```
 
 ## Building
 
