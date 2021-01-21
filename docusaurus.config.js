@@ -19,19 +19,31 @@ module.exports = {
       },
       items: [
         {
+          href: "https://github.com/forgojs/forgo-router",
+          label: "Routing",
+          position: "left",
+        },
+
+        {
+          href: "https://github.com/forgojs/forgo-state",
+          label: "State",
+          position: "left",
+        },
+
+        {
+          href: "https://github.com/forgojs/forgo-examples",
+          label: "Examples",
+          position: "left",
+        },
+        {
           href: "https://twitter.com/forgojs",
           label: "@forgojs",
-          position: "left",
+          position: "right",
         },
         {
           href: "https://github.com/forgojs/forgo",
           label: "GitHub",
           position: "right",
-        },
-        {
-          href: "https://github.com/forgojs/forgo-examples",
-          label: "Examples",
-          position: "left",
         },
       ],
     },
