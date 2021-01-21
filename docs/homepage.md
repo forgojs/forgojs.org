@@ -52,13 +52,13 @@ function SimpleTimer(initialProps) {
         rerender(args.element); // rerender
       }, 1000);
 
-      return <div>{seconds} secs have elapsed...</div>;
+      return <div>{seconds} seconds have elapsed... {props.firstName}!</div>;
     },
   };
 }
 ```
 
-The Component Constructor function and the Component's render() method are both called during the first render with the initial set of props. But for rerenders of the same component, only the render() gets called (with new props). So if you're using props, remember to get it from the render() method.
+The Component Constructor function and the Component's render() method are both called during the first render with the initial set of props. But for subsequent rerenders of the same component, only the render() gets called (with new props). So if you're using props, remember to get it from the render() method.
 
 ## Mounting the Component
 
