@@ -35,7 +35,7 @@ An easy way to get a project started is by cloning one of the following template
 
 ## A Forgo Component
 
-A Forgo Component must have a function (called Component Constructor) that returns an object with a render() function (called Component). 
+A Forgo Component must have a function (called Component Constructor) that returns an object with a render() function (called Component).
 
 Here's an Example.
 
@@ -52,7 +52,11 @@ function SimpleTimer(initialProps) {
         rerender(args.element); // rerender
       }, 1000);
 
-      return <div>{seconds} seconds have elapsed... {props.firstName}!</div>;
+      return (
+        <div>
+          {seconds} seconds have elapsed... {props.firstName}!
+        </div>
+      );
     },
   };
 }
@@ -148,8 +152,6 @@ Lastly, you can pass an event handler to an input and extract the current value 
 
 ```jsx
 function Component(initialProps) {
-  const myInputRef = {};
-
   return {
     render(props, args) {
       function onInput(e) {
@@ -167,9 +169,85 @@ function Component(initialProps) {
 }
 ```
 
+## Lists and Keys
+
+Keys help Forgo identify which items in a list have changed, are added, or are removed. While Forgo works well without keys, it is a good idea to add them since it avoids unnecessary component mounting and unmounting in some cases.
+
+As long as they are unique, there is no restriction on what data type you may use for the key; keys could be strings, numbers or even objects. For string keys and numeric keys, Forgo compares them by value; while for object keys, a reference equality check is used.
+
+```jsx
+function Parent() {
+  return {
+    render(props, args) {
+      const people = [
+        { firstName: "jeswin", id: 1 },
+        { firstName: "kai", id: 2 },
+      ];
+      return (
+        <div>
+          {people.map((item) => (
+            <Child key={item.key} firstName={item.firstName} />
+          ))}
+        </div>
+      );
+    },
+  };
+}
+
+function Child(initialProps) {
+  return {
+    render(props) {
+      return <div>Hello {props.firstName}</div>;
+    },
+  };
+}
+```
+
+## Asynchronous data and event-driven renders
+
+Parts of your application might need to fetch data asynchronously, and refresh your component accordingly.
+
+Here's an example of how to do this:
+
+```jsx
+async function getMessages() {
+  const data = await fetchMessagesFromServer();
+  return data;
+}
+
+export function InboxComponent(props) {
+  // This will be null initially.
+  let messages = undefined;
+
+  return {
+    render(_props, _args) {
+      // Messages are empty. Fetch asynchronously 
+      if (!messages) {
+        getMessages().then((data) => {
+          messages = data.messages;
+        });
+        return <p>Loading data...</p>;
+      }
+
+      // We have messages to show.
+      return (
+        <div>
+          <header>Your Inbox</header>
+          <ul>
+            {messages.map((message) => (
+              <li>{message}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    },
+  };
+}
+```
+
 ## Component Unmount
 
-When a component is unmounted, Forgo will invoke the unmount() function if defined for a component. It receives the current props and args as arguments, just as in the render() function.
+When a component is unmounted, Forgo will invoke the unmount() function if defined for a component. It receives the current props and args as arguments, just as in the render() function. This can be used for any tear down you might want to do.
 
 ```jsx
 function Greeter(initialProps) {
