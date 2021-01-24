@@ -28,10 +28,37 @@ custom_edit_url: null
 npm i forgo
 ```
 
-An easy way to get a project started is by cloning one of the following templates. These templates use parcel as the bundler/build tool.
+### Starting a Forgo project
+
+There are also a couple ready-made templates on GitHub to help you with the initial project scaffolding. These templates use parcel as the bundler/build tool.
 
 - [Starter-kit using JavaScript](https://github.com/forgojs/forgo-template-javascript)
 - [Starter-kit using TypeScript](https://github.com/forgojs/forgo-template-typescript)
+
+This process is easier with degit:
+
+For JavaScript:
+
+```sh
+npx degit forgojs/forgo-template-javascript#main my-project
+```
+
+For TypeScript:
+
+```sh
+npx degit forgojs/forgo-template-typescript#main my-project
+```
+
+And then to run it:
+
+```sh
+# switch to the project directory
+cd my-project
+# Install dependencies
+npm i
+# run!
+npm start
+```
 
 ## A Forgo Component
 
