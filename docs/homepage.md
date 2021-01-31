@@ -273,7 +273,7 @@ export function InboxComponent(initialProps) {
 }
 ```
 
-## Component Unmount
+## The Unmount Event
 
 When a component is unmounted, Forgo will invoke the unmount() function if defined for a component. It receives the current props and args as arguments, just as in the render() function. This can be used for any tear down you might want to do.
 
@@ -290,7 +290,7 @@ function Greeter(initialProps) {
 }
 ```
 
-## Component Mount
+## The Mount Event
 
 If you're an application developer, you'd rarely have to use this. It might however be useful if you're developing libraries or frameworks which use Forgo. mount() gets called with the same arguments as render(), but after getting mounted on a real DOM node. It gets called only once.
 
@@ -302,6 +302,25 @@ function Greeter(initialProps) {
     },
     mount(props, args) {
       console.log(`Mounted on node with id ${args.element.node.id}`);
+    },
+  };
+}
+```
+
+## The AfterRender Event
+
+Again, if you're an application developer you'd rarely need to use this. The afterRender() event runs every time after the render() runs, but after the rendered elements have been attached to actual DOM nodes. The 'previousNode' property of args will give you the node to which the component was previously attached, if it has changed due to the render().
+
+```jsx
+function Greeter(initialProps) {
+  return {
+    render(props, args) {
+      return <div id="hello">Hello {props.firstName}</div>;
+    },
+    afterRender(props, args) {
+      console.log(
+        `This component is mounted on ${args.element.node.id}, and previously to ${args.previousNode.id}`
+      );
     },
   };
 }
@@ -380,16 +399,11 @@ function TodoList(initialProps) {
 }
 ```
 
-But there are a couple of handy options to rerender, 'newProps' and 'forceRerender'.
-
-newProps let you pass a new set of props while rerendering. If you'd like previous props to be used, pass undefined here.
-
-forceRerender defaults to true, but when set to false skips child component rendering if props haven't changed.
+But you could pass newProps as well while rerendering. If you'd like previous props to be used, pass undefined here.
 
 ```js
 const newProps = { name: "Kai" };
-const forceRerender = false;
-rerender(args.element, newProps, forceRerender);
+rerender(args.element, newProps);
 ```
 
 ## Rendering without mounting
