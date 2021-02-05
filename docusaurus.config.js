@@ -31,10 +31,17 @@ module.exports = {
         },
 
         {
-          href: "https://github.com/forgojs/forgo-examples",
-          label: "Examples",
+          href: "https://github.com/forgojs/forgo-ssr",
+          label: "SSR",
           position: "left",
         },
+
+        {
+          href: "https://codesandbox.io/s/forgo-todos-javascript-1oi9b",
+          label: "Sandbox",
+          position: "left",
+        },
+
         {
           href: "https://twitter.com/forgojs",
           label: "@forgojs",
