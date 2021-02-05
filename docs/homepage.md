@@ -426,7 +426,7 @@ Forgo Router (forgo-router) is a tiny router for Forgo, and is just around 1KB g
 
 Here's an example:
 
-```jsx
+```js
 import { Router, Link, matchExactUrl, matchUrl } from "forgo-router";
 
 function App() {
@@ -434,7 +434,7 @@ function App() {
     render() {
       return (
         <Router>
-          <Link href="/">Another Forgo App</Link>
+          <Link href="/">Go to Home Page</Link>
           {matchExactUrl("/", () => <Home />) ||
             matchUrl("/customers", () => <Customers />) ||
             matchUrl("/about", () => <AboutPage />)}
@@ -451,9 +451,10 @@ Forgo State (forgo-state) is an easy-to-use application state management solutio
 
 Here's an example:
 
-```jsx
+```js
 import { bindToStates, defineState } from "forgo-state";
 
+// Define one (or more) application state containers.
 const mailboxState = defineState({
   messages: [],
   drafts: [],
@@ -475,16 +476,42 @@ function MailboxView() {
       );
     },
   };
-  // MainboxView must change whenever mailboxState changes.
+  // MailboxView must change whenever mailboxState changes.
   return bindToStates([mailboxState], component);
 }
 
-// You could update the state properties directly:
 async function updateInbox() {
   const data = await fetchInboxData();
   // The next line causes a rerender of the MailboxView component
   mailboxState.messages = data;
 }
+```
+
+## Integrating Forgo into an existing app
+
+Forgo is quite easy to integrate into an existing web app written with other frameworks or with older libraries like jQuery.
+
+To help with that, the forgo-powertoys library (less than 1KB in size) exposes a rerenderElement() function which can rerender a mounted Forgo component with just a CSS selector. Even from outside the Forgo app!
+
+```js
+import { rerenderElement } from "forgo-powertoys";
+
+// A forgo component.
+function LiveScores() {
+  return {
+    render(props) {
+      return <p id="live-scores">Top score is {props.topscore}</p>;
+    },
+  };
+}
+
+//mount it on a DOM node as usual
+window.addEventListener("load", () => {
+  mount(<SimpleTimer />, document.getElementById("root"));
+});
+
+// Now you can rerender the component from anywhere, anytime!
+rerenderElement("#live-scores", { topscore: 244 });
 ```
 
 ## Try it out on CodeSandbox
