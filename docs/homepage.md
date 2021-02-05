@@ -462,6 +462,7 @@ const mailboxState = defineState({
   unread: 0,
 });
 
+// A Forgo component
 function MailboxView() {
   const component = {
     render(props: any, args: ForgoRenderArgs) {
@@ -514,6 +515,28 @@ window.addEventListener("load", () => {
 
 // Now you can rerender the component from anywhere, anytime!
 rerenderElement("#live-scores", { topscore: 244 });
+```
+
+## Server-side Rendering (SSR)
+
+You can render components to an html (string) with the forgo-ssr package. This allows you to prerender components on the server and will work with Node.JS servers like Koa, Express etc. Read more at https://github.com/forgojs/forgo-ssr
+
+Here's an example:
+
+```js
+import render from "forgo-ssr";
+
+// A forgo component.
+function MyComponent() {
+  return {
+    render() {
+      return <div>Hello world</div>;
+    },
+  };
+}
+
+// Get the html (string) and serve it via koa, express etc.
+const html = render(<MyComponent />);
 ```
 
 ## Try it out on CodeSandbox
