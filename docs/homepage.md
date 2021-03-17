@@ -30,7 +30,7 @@ npm i forgo
 
 ### Starting a Forgo project
 
-The easiest way to get started is with the 'create-forgo-app' utility.
+The easiest way to get started is with the 'create-forgo-app' utility. This relies on git, so you should have git installed on your machine.
 
 ```sh
 npx create-forgo-app my-project
