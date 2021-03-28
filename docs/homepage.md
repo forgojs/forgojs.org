@@ -575,7 +575,7 @@ Most users are better off just using create-forgo-app to create the project skel
 
 But for people who are doing it manually, we'll cover webpack-specific configuration here. Other bundlers would need similar configuration.
 
-For using esbuild-loader with JavaScript/JSX use the following webpack config:
+For using esbuild-loader with JavaScript/JSX, use the following webpack config:
 
 ```js
 module.exports = {
@@ -598,7 +598,7 @@ module.exports = {
 };
 ```
 
-For using esbuild-loader with TypeScript/TSX use the following webpack config:
+For using esbuild-loader with TypeScript/TSX, use the following webpack config:
 
 ```js
 module.exports = {
@@ -621,7 +621,7 @@ module.exports = {
 };
 ```
 
-While using TypeScript, also use the following two lines in your tsconfig file. This lets you do `tsc --noEmit` for type checking, which esbuild-loader doesn't do.
+While using TypeScript, also add the following two lines to your tsconfig.json. This lets you do `tsc --noEmit` for type checking, which esbuild-loader doesn't do.
 
 ```json
 {
@@ -633,7 +633,7 @@ While using TypeScript, also use the following two lines in your tsconfig file. 
 }
 ```
 
-If you're using babel-loader (slower) you'd need this webpack config:
+If you're using babel-loader (slower), you'd need this webpack config:
 
 ```js
 module.exports = {
@@ -667,7 +667,7 @@ module.exports = {
 };
 ```
 
-Along with these two lines in your tsconfig.json file:
+For TypeScript with ts-loader, add these two lines to tsconfig.json:
 
 ```json
 {
