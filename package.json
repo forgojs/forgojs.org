@@ -1,33 +1,28 @@
 {
   "name": "forgojs-org",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "clean": "rm -rf build && rm -rf dist && mkdir build && mkdir dist",
+    "copy-static": "cp -r src/* dist && cp -r static/* build",
+    "build-css": "npx tailwindcss-cli build ./src/styles.css -o ./dist/styles.css && cp dist/styles.css build",
+    "build-css-prod": "NODE_ENV=production npx tailwindcss-cli build ./src/styles.css -o ./dist/styles.css",
+    "gabble": "npx gabble -s dist/pages -o build -x components",
+    "build": "npm run clean && npm run copy-static && npm run build-css && tsc && npm run gabble",
+    "build-html": "tsc && npm run gabble",
+    "build-prod": "NODE_ENV=production npm run build"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.59",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.59",
-    "@mdx-js/react": "^1.5.8",
-    "clsx": "^1.1.1",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@types/js-beautify": "^1.13.1",
+    "@types/marked": "^2.0.1",
+    "forgo": "^1.1.1",
+    "forgo-ssr": "^1.0.4",
+    "gabble": "^0.0.6",
+    "highlight.js": "^10.7.1",
+    "js-beautify": "^1.13.5",
+    "marked": "^2.0.1",
+    "tailwindcss": "^2.0.3",
+    "tailwindcss-cli": "^0.1.2",
+    "typescript": "^4.2.3"
   }
 }
