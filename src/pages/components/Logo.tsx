@@ -4,12 +4,14 @@ export default function Logo() {
   return {
     render() {
       return (
-        <img
-          className="navbar__logo"
-          src="/img/forgo.png"
-          alt="ForgoJS"
-          style={{ width: "32px", height: "32px" }}
-        ></img>
+        <div className="flex">
+          <img
+            className="navbar__logo md:inline"
+            src="/img/forgo.png"
+            alt="ForgoJS"
+            style={{ width: "32px", height: "32px" }}
+          />
+        </div>
       );
     },
   };

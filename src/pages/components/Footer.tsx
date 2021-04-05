@@ -5,20 +5,14 @@ export default function Footer() {
   return {
     render() {
       return (
-        <div>
-          <h2>Community</h2>
-          <ul>
-            <li>
-              <a href="https://twitter.com/forgojs">@forgojs</a>
-            </li>
-            <li>
-              <a href="https://twitter.com/jeswin">@jeswin</a>
-            </li>
-          </ul>
-          <div>
-            Copyright © 2021 @jeswin and contributors. Built with{" "}
-            <a href="https://github.com/forgojs/gabble">Gabble</a>.
-          </div>
+        <div className="p-2 mt-24 border-t border-gray-500 text-center">
+          <p>
+            MIT Licensed. Copyright:{" "}
+            <a href="https://twitter.com/jeswin">@jeswin</a> and contributors.
+          </p>
+          <p className="text-sm font-bold">
+            Built with <a href="https://github.com/forgojs/gabble">Gabble.</a>
+          </p>
         </div>
       );
     },
