@@ -10,6 +10,7 @@ export default function html(contents: string) {
     rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/styles.css" />
   <link rel="stylesheet" type="text/css" href="/highlight.css" />
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.ico"/>
   <script src="/page.js"></script>
   <title>Forgo | ForgoJS</title>
 </head>
