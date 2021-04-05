@@ -5,7 +5,7 @@ export default function Footer() {
   return {
     render() {
       return (
-        <div className="p-2 mt-24 border-t border-gray-500 text-center">
+        <div className="footer p-2 mt-24 border-t border-gray-500 text-center">
           <p>
             MIT Licensed. Copyright:{" "}
             <a href="https://twitter.com/jeswin">@jeswin</a> and contributors.
