@@ -8,7 +8,7 @@ export type MarkdownProps = {
 export default function Markdown(initialProps: MarkdownProps) {
   return {
     render(props: MarkdownProps) {
-      var renderer = new marked.Renderer();
+      const renderer = new marked.Renderer();
 
       marked.setOptions({
         renderer: renderer,
@@ -19,10 +19,10 @@ export default function Markdown(initialProps: MarkdownProps) {
         },
       });
 
-      var toc: { anchor: string; level: number; text: string }[] = [];
+      const toc: { anchor: string; level: number; text: string }[] = [];
 
       renderer.heading = function (text, level, raw) {
-        var anchor =
+        const anchor =
           this.options.headerPrefix + raw.toLowerCase().replace(/[^\w]+/g, "-");
         toc.push({
           anchor: anchor,
