@@ -644,7 +644,7 @@ Add these lines to babel.config.json:
   "plugins": [
     [
       "@babel/plugin-transform-react-jsx",
-      { "pragma": "h" }
+      { "pragma": "forgo.createElement" }
     ]
   ]
 }
