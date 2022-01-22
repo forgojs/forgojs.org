@@ -1,11 +1,16 @@
 import * as forgo from "forgo";
-import Footer from "./components/Footer";
-import Markdown from "./components/Markdown";
-import TopBar from "./components/TopBar";
+import Footer from "./components/Footer.js";
+import Markdown from "./components/Markdown.js";
+import TopBar from "./components/TopBar.js";
 import * as fs from "fs";
 import * as path from "path";
 import renderToString from "forgo-ssr";
-import layout from "./layouts/basic";
+import layout from "./layouts/basic.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const content = fs.readFileSync(path.join(__dirname, "index/content.md"));
 

@@ -1,5 +1,5 @@
 import * as forgo from "forgo";
-import Logo from "./Logo";
+import Logo from "./Logo.js";
 
 export default function TopBar() {
   return {

@@ -1,5 +1,6 @@
 import * as forgo from "forgo";
-import * as marked from "marked";
+import { marked } from "marked";
+import hljs from "highlight.js";
 
 export type MarkdownProps = {
   src: string;
@@ -10,20 +11,19 @@ export default function Markdown(initialProps: MarkdownProps) {
     render(props: MarkdownProps) {
       const renderer = new marked.Renderer();
 
+      const toc: { anchor: string; level: number; text: string }[] = [];
+
       marked.setOptions({
         renderer: renderer,
         highlight: function (code, language) {
-          const hljs = require("highlight.js");
           const validLanguage = hljs.getLanguage(language) ? language : "jsx";
           return hljs.highlight(code, { language: validLanguage }).value;
         },
       });
 
-      const toc: { anchor: string; level: number; text: string }[] = [];
-
       renderer.heading = function (text, level, raw) {
         const anchor =
-          this.options.headerPrefix + raw.toLowerCase().replace(/[^\w]+/g, "-");
+          raw.toLowerCase().replace(/[^\w]+/g, "-");
         toc.push({
           anchor: anchor,
           level: level,

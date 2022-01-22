@@ -1,5 +1,4 @@
 import * as forgo from "forgo";
-import Logo from "./Logo";
 
 export default function Footer() {
   return {

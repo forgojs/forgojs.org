@@ -5,24 +5,25 @@
   "scripts": {
     "clean": "rm -rf build && rm -rf dist && mkdir build && mkdir dist",
     "copy-static": "cp -r src/* dist && cp -r dist/* build && cp -r static/* build",
-    "build-css": "npx tailwindcss-cli build ./src/styles.css -o ./dist/styles.css && cp dist/styles.css build",
-    "build-css-prod": "NODE_ENV=production tailwindcss-cli build ./src/styles.css -o ./dist/styles.css && cp dist/styles.css build",
+    "build-css": "npx tailwindcss build  -c tailwind.config.cjs -i ./src/styles.css -o ./dist/styles.css && cp dist/styles.css build",
+    "build-css-prod": "NODE_ENV=production npx tailwindcss -c tailwind.config.cjs build -i ./src/styles.css -o ./dist/styles.css && cp dist/styles.css build",
     "gabble": "npx gabble -s dist/pages -o build -x components",
     "build": "npm run clean && npx tsc && npm run copy-static && npm run build-css-prod && npm run gabble",
     "build-dev": "npm run clean && npx tsc && npm run copy-static && npm run build-css && npm run gabble",
     "build-html": "npx tsc && cp dist/page.js build && npm run gabble"
   },
+  "type": "module",
   "dependencies": {
-    "@types/js-beautify": "^1.13.1",
-    "@types/marked": "^2.0.2",
-    "forgo": "^1.1.4",
-    "forgo-ssr": "^1.1.4",
-    "gabble": "^0.0.8",
-    "highlight.js": "^10.7.2",
-    "js-beautify": "^1.13.13",
-    "marked": "^2.0.3",
-    "tailwindcss": "^2.1.2",
-    "tailwindcss-cli": "^0.1.2",
-    "typescript": "^4.2.4"
+    "@types/js-beautify": "^1.13.3",
+    "@types/marked": "^4.0.1",
+    "forgo": "^2.1.1",
+    "forgo-ssr": "^1.1.27",
+    "gabble": "^2.0.5",
+    "highlight.js": "^11.4.0",
+    "js-beautify": "^1.14.0",
+    "marked": "^4.0.10",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.15",
+    "typescript": "^4.5.5"
   }
 }
