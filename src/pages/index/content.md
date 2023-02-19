@@ -129,37 +129,17 @@ const ClickCounter = (initialProps) => {
 };
 ```
 
-Here's how the API looks when using TypeScript (which is optional):
+We have full typescript support as well. Here's an example.
 
 ```tsx
-import * as forgo from "forgo";
+import { createElement, Fragment, mount, Component } from "forgo";
 
-// The constructor generic type accepts the shape of your component's props
-const HelloWorld = () => {
-  return new forgo.Component({
-    render({ name }) {
-      return <p>Hello, {name}!</p>;
-    },
-  });
-};
-```
-
-If you assign the component to a variable (such as when adding lifecycle event
-handlers), you'll need to annotate the generic types on both the constructor and
-the component.
-
-Generic props can also be used:
-
-```tsx
-import * as forgo from "forgo";
-
-// Props have to be assigned to the initial props for TSX to recognize the generic
 type ListProps<T extends string | number> = {
   data: T[];
 };
 
-const List = <T extends string | number>(initial: ListProps<T>) =>
-  new forgo.Component<ListProps<T>>({
+function List<T extends string | number>(initial: ListProps<T>) {
+  return new Component<ListProps<T>>({
     render(props) {
       return (
         <ul>
@@ -170,34 +150,14 @@ const List = <T extends string | number>(initial: ListProps<T>) =>
       );
     },
   });
+}
 
 const App = () =>
-  new forgo.Component({
+  new Component({
     render(props) {
       return <List data={[1, "2", 3]} />;
     },
   });
-```
-
-_If you're handy with TypeScript, [we'd love a PR to infer the types!](https://github.com/forgojs/forgo/issues/68)_
-
-```tsx
-import * as forgo from "forgo";
-
-interface HelloWorldProps {
-  name: string;
-}
-const HelloWorld = () => {
-  const component = new forgo.Component<HelloWorldProps>({
-    render({ name }) {
-      return <p>Hello, {name}!</p>;
-    },
-  });
-
-  component.mount(() => console.log("Mounted!"));
-
-  return component;
-};
 ```
 
 ## Launching your components when the page loads
@@ -1065,16 +1025,6 @@ Add these lines to tsconfig.json:
 If you find issues, please file a bug on
 [Github](https://github.com/forgojs/forgo/issues). You can also reach out to us
 via Twitter (@forgojs).
-
-## Deprecation of legacy component syntax is 3.2.0
-
-In version 3.2.0, Forgo introduced a new syntax for components. This change
-makes Forgo easier to extend with reusable libraries, and makes it
-straightforward to colocate logic that spans mounts & unmounts.
-
-The legacy component syntax will be removed in v4.0. Until then, Forgo will
-print a warning to the console whenever it sees a legacy component. You can
-suppress these warnings by setting `window.FORGO_NO_LEGACY_WARN = true;`.
 
 ### Migrating
 
